@@ -1,0 +1,25 @@
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: merch
+      POSTGRES_PASSWORD: merch
+      POSTGRES_DB: merch
+    volumes: [pgdata:/var/lib/postgresql/data]
+  api:
+    build: .
+    environment:
+      DATABASE_URL: postgresql+psycopg://merch:merch@db:5432/merch
+      UPLOAD_DIR: /data/uploads
+    volumes: ["./data:/data"]
+    ports: ["8000:8000"]
+    depends_on: [db]
+  bot:
+    build: .
+    command: python -m app.bot.telegram_bot
+    environment:
+      BOT_TOKEN: ${BOT_TOKEN}
+      API_URL: http://api:8000
+    depends_on: [api]
+volumes:
+  pgdata:

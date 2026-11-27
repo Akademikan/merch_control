@@ -1,0 +1,2 @@
+# Распознавание товаров. Сначала поставьте torch под вашу видеокарту: https://pytorch.org/get-started/locally/
+ultralytics>=8.2

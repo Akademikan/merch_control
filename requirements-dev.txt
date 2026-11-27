@@ -1,0 +1,4 @@
+-r requirements.txt
+pytest>=8
+piexif>=1.1.3
+scikit-learn>=1.4        # обучение решающего модуля
